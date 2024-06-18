@@ -7,15 +7,14 @@ export function createGetter(path) {
   const massSplit = path.split('.');
 
   return function (obj) {
-    let result = {...obj};
+    let result = obj;
 
-    massSplit.forEach(value => {
-      if (result?.hasOwnProperty(value)) {
-        result = result[value];
-      } else {
-        result = undefined;
+    for (const field of massSplit) {
+      if (!result?.hasOwnProperty(field)) {
+        return;
       }
-    });
+      result = result[field];
+    }
     return result;
   };
 }
