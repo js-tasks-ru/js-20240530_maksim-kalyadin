@@ -38,9 +38,13 @@ export default class SortableTable2 extends SortableTable {
 
   createDefaultSort() {
     const tableCellElement = this.element.querySelector(`[data-id="${this.sorted.id}"]`);
-    const arrowElement = this.element.querySelector('[data-element="arrow"]');
+
     tableCellElement.dataset.order = this.sorted.order;
-    tableCellElement.innerHTML = arrowElement;
+    tableCellElement.innerHTML = `
+      <span data-element="arrow" class="sortable-table__sort-arrow">
+          <span class="sort-arrow"></span>
+      </span>`;
+
     this.sort(this.sorted.id, this.sorted.order);
   }
 
